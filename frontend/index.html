@@ -14,6 +14,9 @@
     <div id="app">
         <button v-on:click="updatePost()">Mettre à jour</button>
         <button v-on:click="CreerUnPost()">Ajouter</button>
+
+
+        <button v-on:click="getAllData()">Another One</button>
         <ul>
             <li v-for="post in posts">{{ post.title }}</li>
         </ul>

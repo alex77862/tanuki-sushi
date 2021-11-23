@@ -17,6 +17,11 @@ var app = new Vue({
                     userId: 1
                 }).then(reponse => console.log(reponse))
                 .catch(error => console.log(error));
+        },
+        getAllData() {
+            axios.get('http://localhost:3000/api/stuff')
+                .then(reponse => this.posts = reponse.data)
+                .catch(error => console.log(error));
         }
     }
 });
