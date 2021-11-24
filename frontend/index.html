@@ -16,10 +16,11 @@
         <button v-on:click="CreerUnPost()">Ajouter</button>
 
 
-        <button v-on:click="getAllData()">Another One</button>
-        <ul>
-            <li v-for="post in posts">{{ post.title }}</li>
-        </ul>
+        <button v-on:click="getFakeData()">Get fake data</button>
+        <div v-for="post in posts">
+            <p>{{ post.title }}</p>
+            <img v-bind:src='post.imageUrl' height="100"/>
+        </div>
     </div>
 
     <script src="./script/vue.js"></script>

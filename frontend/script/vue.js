@@ -18,8 +18,8 @@ var app = new Vue({
                 }).then(reponse => console.log(reponse))
                 .catch(error => console.log(error));
         },
-        getAllData() {
-            axios.get('http://localhost:3000/api/stuff')
+        getFakeData() {
+            axios.get('http://localhost:3000/api/fakedata')
                 .then(reponse => this.posts = reponse.data)
                 .catch(error => console.log(error));
         }
