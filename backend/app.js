@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const Article = require('./models/article');
 const app = express();
 
+app.use(bodyParser.json());
+   app.use(bodyParser.urlencoded({ extended: false }));
 // CORS
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -20,7 +22,7 @@ mongoose.connect('mongodb+srv://test:1234@cluster0.483bg.mongodb.net/tanukiDatab
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-
+// Demo
 app.post('/api/demo', (req, res, next) => {
   console.log(req.body);
   res.status(201).json({
@@ -28,7 +30,7 @@ app.post('/api/demo', (req, res, next) => {
   });
 });
 
-
+// Fake Data
 app.use('/api/fakedata', (req, res, next) => {
   const fakedata = [{
       _id: 'oeihfzeoi',
@@ -42,7 +44,7 @@ app.use('/api/fakedata', (req, res, next) => {
       _id: 'oeihfzeomoihi',
       title: 'Ballon de foot',
       description: 'Les infos de mon deuxième objet',
-      imageUrl: 'https://www.ohdandycool.com/wp-content/uploads/2020/07/meilleurs-ballons-de-football-732x380.jpg',
+      imageUrl: 'https://m.media-amazon.com/images/I/91lVJo77UIS._AC_SX425_.jpg',
       price: 2900,
       userId: 'qsomihvqios',
     },
@@ -50,21 +52,20 @@ app.use('/api/fakedata', (req, res, next) => {
   res.status(200).json(fakedata);
 });
 
-
+// Post One
 app.post('/api/stuff', (req, res, next) => {
-  delete req.body._id;
+  // delete req.body._id;
   const article = new Article({
-    ...req.body
+    ...req.body.formulaire
   });
   article.save()
     .then(() => res.status(201).json({
       message: 'Objet enregistré !'
     }))
-    .catch(error => res.status(400).json({
-      error
-    }));
+    .catch(error => console.log(error));
 });
 
+// Find All
 app.use('/api/stuff', (req, res, next) => {
   Article.find()
     .then(articles => res.status(200).json(articles))
@@ -73,6 +74,8 @@ app.use('/api/stuff', (req, res, next) => {
     }));
 });
 
+
+// Find One
 app.get('/api/stuff/:id', (req, res, next) => {
   Article.findOne({
       _id: req.params.id
@@ -83,6 +86,8 @@ app.get('/api/stuff/:id', (req, res, next) => {
     }));
 });
 
+
+// Update One
 app.put('/api/stuff/:id', (req, res, next) => {
   Article.updateOne({
       _id: req.params.id
@@ -98,6 +103,7 @@ app.put('/api/stuff/:id', (req, res, next) => {
     }));
 });
 
+// Delete One
 app.delete('/api/stuff/:id', (req, res, next) => {
   Article.deleteOne({
       _id: req.params.id
@@ -111,6 +117,6 @@ app.delete('/api/stuff/:id', (req, res, next) => {
 });
 
 
-app.use(bodyParser.json());
+
 
 module.exports = app;
