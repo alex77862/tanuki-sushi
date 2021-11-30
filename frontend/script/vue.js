@@ -1,6 +1,3 @@
-// const { title } = require("process");
-// const article = require("../../backend/models/article");
-
 var app = new Vue({
     el: '#app',
     data: {
@@ -11,7 +8,6 @@ var app = new Vue({
         description: '',
         price: '',
         // imageUrl: '',
-        // formulaire: {}
     },
     mounted: function () {
         this.getRealDada()
@@ -36,8 +32,7 @@ var app = new Vue({
             this.showAddForm = true;
         },
         formSubmit(e) {
-            e.preventDefault();
-
+            e.preventDefault(); // empeche le refresh de la page
             let formulaire = {};
 
             formulaire.title = this.title,
@@ -52,6 +47,9 @@ var app = new Vue({
                     e.target.reset()
                 })
                 .catch(error => console.log(error));
+        },
+        getItemId(e) {
+            console.log(e._id)
         }
     }
 });

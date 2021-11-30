@@ -15,10 +15,10 @@
 
 <body>
     <div id="app" class="container" style="padding-top: 30px;">
-        <!-- <button class="btn btn-primary" v-on:click="testAPI()">Test API</button> -->
+        <!-- <button class="btn btn-primary" @click="testAPI()">Test API</button> -->
 
         <!-- Get Fake Data -->
-        <button class="btn btn-primary" v-on:click="getFakeData()">Get fake data</button>
+        <button class="btn btn-primary" @click="getFakeData()">Get fake data</button>
         <div v-for="post in posts">
             <p>{{ post.title }}</p>
             <img v-bind:src='post.imageUrl' height="100" />
@@ -28,18 +28,21 @@
         <!-- Get Dynamique Data -->
         <div class="div1 row">
             <h3>Articles</h3>
-            <div class="div2 col-4" v-for="article in articles">
-                <p>Nom: {{ article.title }}</p>
-                <p>Description: {{ article.description }}</p>
-                <p>Prix: {{ article.price }}€</p>
-            </div>
+            <a class="div2 col-3" v-for="article in articles" @click="getItemId(article)">
+                <div>
+                    <p>Nom: {{ article.title }}</p>
+                    <p>Description: {{ article.description }}</p>
+                    <p>Prix: {{ article.price }}€</p>
+                    <!-- ID ----------------------------->
+                        <p>Id: {{ article._id }}</p>
+                    <!----------------------------------->
+                </div>
+            </a>
         </div>
 
 
-
-
         <!-- Add item -->
-        <button class="btn btn-primary" v-on:click="callAddForm()">Ajouter un item</button>
+        <button class="btn btn-primary" @click="callAddForm()">Ajouter un item</button>
 
         <div v-if="showAddForm == true">
             <h3>Ajouter un item</h3>
@@ -50,20 +53,9 @@
                 <!-- <input v-model="imageUrl" placeholder="Url de l'image" required></input> -->
                 <button class="btn btn-primary" type="submit">Submit</button>
             </form>
-        </div>
-
-        
-
-
-
-
-
-
+        </div>    
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="./script/vue.js"></script>
 </body>
-
 </html>
